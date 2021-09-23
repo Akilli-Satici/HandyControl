@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,25 +24,34 @@ namespace HandyControl.Controls
                 {
                     RestoreDirectory = true,
                     Filter = Filter,
-                    DefaultExt = DefaultExt
+                    DefaultExt = DefaultExt,
+                    Multiselect = true
                 };
 
                 if (dialog.ShowDialog() == true)
                 {
-                    SetValue(UriPropertyKey, new Uri(dialog.FileName, UriKind.RelativeOrAbsolute));
-                    SetValue(PreviewBrushPropertyKey, new ImageBrush(BitmapFrame.Create(Uri, BitmapCreateOptions.IgnoreImageCache, BitmapCacheOption.None))
+                    List<Uri> uriList = new List<Uri>();
+                    foreach (var file in dialog.FileNames)
                     {
-                        Stretch = Stretch
-                    });
-                    SetValue(HasValuePropertyKey, ValueBoxes.TrueBox);
+                        uriList.Add(new Uri(file, UriKind.RelativeOrAbsolute));
+                    }
+
+                    SetValue(UrisProperty, uriList);
+                    SetValue(PreviewBrushProperty,
+                        new ImageBrush(BitmapFrame.Create(Uris[0], BitmapCreateOptions.IgnoreImageCache,
+                            BitmapCacheOption.None))
+                        {
+                            Stretch = Stretch
+                        });
+                    SetValue(HasValueProperty, ValueBoxes.TrueBox);
                     SetCurrentValue(ToolTipProperty, dialog.FileName);
                 }
             }
             else
             {
-                SetValue(UriPropertyKey, default(Uri));
-                SetValue(PreviewBrushPropertyKey, default(Brush));
-                SetValue(HasValuePropertyKey, ValueBoxes.FalseBox);
+                SetValue(UrisProperty, default(Uri));
+                SetValue(PreviewBrushProperty, default(Brush));
+                SetValue(HasValueProperty, ValueBoxes.FalseBox);
                 SetCurrentValue(ToolTipProperty, default);
             }
         }
@@ -54,21 +65,19 @@ namespace HandyControl.Controls
             set => SetValue(StretchProperty, value);
         }
 
-        public static readonly DependencyPropertyKey UriPropertyKey = DependencyProperty.RegisterReadOnly(
-            "Uri", typeof(Uri), typeof(ImageSelector), new PropertyMetadata(default(Uri)));
+        public static DependencyProperty UrisProperty = DependencyProperty.Register(
+            "Uris", typeof(List<Uri>), typeof(ImageSelector), new PropertyMetadata(default(List<Uri>)));
 
-        public static readonly DependencyProperty UriProperty = UriPropertyKey.DependencyProperty;
 
-        public Uri Uri
+        public List<Uri> Uris
         {
-            get => (Uri) GetValue(UriProperty);
-            set => SetValue(UriProperty, value);
+            get => (List<Uri>) GetValue(UrisProperty);
+            set => SetValue(UrisProperty, value);
         }
 
-        public static readonly DependencyPropertyKey PreviewBrushPropertyKey = DependencyProperty.RegisterReadOnly(
+        public static readonly DependencyProperty PreviewBrushProperty = DependencyProperty.Register(
             "PreviewBrush", typeof(Brush), typeof(ImageSelector), new PropertyMetadata(default(Brush)));
 
-        public static readonly DependencyProperty PreviewBrushProperty = PreviewBrushPropertyKey.DependencyProperty;
 
         public Brush PreviewBrush
         {
@@ -77,7 +86,8 @@ namespace HandyControl.Controls
         }
 
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
-            "StrokeThickness", typeof(double), typeof(ImageSelector), new FrameworkPropertyMetadata(ValueBoxes.Double1Box, FrameworkPropertyMetadataOptions.AffectsRender));
+            "StrokeThickness", typeof(double), typeof(ImageSelector),
+            new FrameworkPropertyMetadata(ValueBoxes.Double1Box, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public double StrokeThickness
         {
@@ -86,7 +96,8 @@ namespace HandyControl.Controls
         }
 
         public static readonly DependencyProperty StrokeDashArrayProperty = DependencyProperty.Register(
-            "StrokeDashArray", typeof(DoubleCollection), typeof(ImageSelector), new FrameworkPropertyMetadata(default(DoubleCollection), FrameworkPropertyMetadataOptions.AffectsRender));
+            "StrokeDashArray", typeof(DoubleCollection), typeof(ImageSelector),
+            new FrameworkPropertyMetadata(default(DoubleCollection), FrameworkPropertyMetadataOptions.AffectsRender));
 
         public DoubleCollection StrokeDashArray
         {
@@ -112,10 +123,9 @@ namespace HandyControl.Controls
             set => SetValue(FilterProperty, value);
         }
 
-        public static readonly DependencyPropertyKey HasValuePropertyKey = DependencyProperty.RegisterReadOnly(
+        public static readonly DependencyProperty HasValueProperty = DependencyProperty.Register(
             "HasValue", typeof(bool), typeof(ImageSelector), new PropertyMetadata(ValueBoxes.FalseBox));
 
-        public static readonly DependencyProperty HasValueProperty = HasValuePropertyKey.DependencyProperty;
 
         public bool HasValue
         {

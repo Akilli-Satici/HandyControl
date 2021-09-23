@@ -12,7 +12,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="StrokeDashArray" Value="2,2"/>
         <Setter Property="hc:IconSwitchElement.Geometry" Value="{StaticResource AddGeometry}"/>
-        <Setter Property="hc:IconSwitchElement.GeometrySelected" Value="{StaticResource RemoveGeometry}"/>
+        <Setter Property="hc:IconSwitchElement.GeometrySelected" Value="{StaticResource UpGeometry}"/>
+        <Setter Property="hc:IconSwitchElement.GeometrySelected" Value="{StaticResource UpGeometry}"/>
         <Setter Property="hc:BorderElement.CornerRadius" Value="{StaticResource DefaultCornerRadius}"/>
         <Setter Property="Template">
             <Setter.Value>

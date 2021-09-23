@@ -3,5 +3,7 @@
     <Style BasedOn="{StaticResource TreeViewItemBaseStyle}" TargetType="TreeViewItem"/>
 
     <Style BasedOn="{StaticResource TreeViewBaseStyle}" TargetType="TreeView"/>
+    <Style x:Key="TreeViewHandy"  BasedOn="{StaticResource TreeViewBaseStyle}" TargetType="TreeView"/>
+
 
 </ResourceDictionary>

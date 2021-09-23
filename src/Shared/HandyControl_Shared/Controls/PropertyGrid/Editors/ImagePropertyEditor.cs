@@ -18,7 +18,7 @@ namespace HandyControl.Controls
                 HorizontalAlignment = HorizontalAlignment.Left
             };
 
-            BindingOperations.SetBinding(this, UriProperty, new Binding(ImageSelector.UriProperty.Name)
+            BindingOperations.SetBinding(this, UriProperty, new Binding(ImageSelector.UrisProperty.Name)
             {
                 Source = imageSelector,
                 Mode = BindingMode.OneWay

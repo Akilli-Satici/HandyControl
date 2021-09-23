@@ -113,7 +113,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DataGridBaseStyle}" TargetType="DataGrid"/>
+    <Style x:Key="HandyDataGrid"  BasedOn="{StaticResource DataGridBaseStyle}" TargetType="DataGrid"/>
 
     <Style x:Key="DataGridCellStyle.Small" BasedOn="{StaticResource DataGridCellStyle}" TargetType="DataGridCell">
         <Setter Property="Padding" Value="6,2"/>
