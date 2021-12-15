@@ -14,6 +14,16 @@ namespace HandyControl.Controls
 {
     public class ImageSelector : Control
     {
+        public static readonly RoutedEvent ImageSelectedEvent =
+            EventManager.RegisterRoutedEvent("ImageSelected", RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler), typeof(ImageSelector));
+
+        public event RoutedEventHandler ImageSelected
+        {
+            add => AddHandler(ImageSelectedEvent, value);
+            remove => RemoveHandler(ImageSelectedEvent, value);
+        }
+
         public ImageSelector() => CommandBindings.Add(new CommandBinding(ControlCommands.Switch, SwitchImage));
 
         private void SwitchImage(object sender, ExecutedRoutedEventArgs e)
@@ -45,6 +55,7 @@ namespace HandyControl.Controls
                         });
                     SetValue(HasValueProperty, ValueBoxes.TrueBox);
                     SetCurrentValue(ToolTipProperty, dialog.FileName);
+                    RaiseEvent(new RoutedEventArgs(ImageSelectedEvent, this));
                 }
             }
             else
