@@ -85,6 +85,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Tag\TagContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Text\HighlightTextBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Text\SimpleText.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Enum\LinearLayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\Helper\FullScreenHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Window\GlowWindow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\EnumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\PanelUvSize.cs" />
@@ -427,10 +429,19 @@
     <None Include="$(MSBuildThisFileDirectory)Themes\Styles\Base\AutoCompleteTextBoxBaseStyle.xaml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)Themes\Styles\Base\ItemsPanelTemplate.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Themes\Styles\Base\ElementGroupBaseStyle.xaml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)Themes\Styles\Base\ListViewBaseStyle.xaml">
       <SubType>Designer</SubType>
     </None>
     <None Include="$(MSBuildThisFileDirectory)Themes\Styles\Base\DataGridBaseStyle.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Themes\Styles\ElementGroup.xaml">
       <SubType>Designer</SubType>
     </None>
     <None Include="$(MSBuildThisFileDirectory)Themes\XamlCombine.exe" />
